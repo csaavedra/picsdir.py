@@ -64,7 +64,6 @@ def Main(args):
             if mimetypes.guess_type(filename)[0] in ['image/jpeg', 'image/x-canon-cr2']:
 		print filename
                 move_smartly (filename, dir_out, suffix)
-    print sum(os.path.getsize(join(root, name)) for name in files)
 
 start=Main(sys.argv)
 
