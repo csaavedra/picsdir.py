@@ -24,9 +24,8 @@ import os.path
 import shutil
 import mimetypes
 
-def move_smartly(file, dir_in, dir_out, suffix):
-    image_file = os.path.join (dir_in, file)
-    metadata = pyexiv2.ImageMetadata(image_file)
+def move_smartly(file, dir_out, suffix):
+    metadata = pyexiv2.ImageMetadata(file)
     metadata.read()
     if ('Exif.Photo.DateTimeOriginal' in metadata):
         date_creation = metadata['Exif.Photo.DateTimeOriginal'].value
@@ -38,7 +37,7 @@ def move_smartly(file, dir_in, dir_out, suffix):
             os.mkdir(target_dir)
 
         try:
-            shutil.move (image_file, target_dir)
+            shutil.move (file, target_dir)
         except shutil.Error:
             print file + " already exists in destination, not moving."
     else:
@@ -64,7 +63,7 @@ def Main(args):
             filename = os.path.join (root, f)
             if mimetypes.guess_type(filename)[0] in ['image/jpeg', 'image/x-canon-cr2']:
 		print filename
-                move_smartly (filename, dir_in, dir_out, suffix)
+                move_smartly (filename, dir_out, suffix)
     print sum(os.path.getsize(join(root, name)) for name in files)
 
 start=Main(sys.argv)
