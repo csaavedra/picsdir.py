@@ -52,6 +52,10 @@ def Main(args):
         dir_out = dir_in
     else:
         dir_out = args[2]
+
+    if (not os.path.isdir(dir_out)):
+        sys.exit("'" + dir_out + "' doesn't exist or is not a directory, not doing anything.")
+
     if (len (args) < 4):
         suffix = ''
     else:
