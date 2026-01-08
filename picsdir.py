@@ -39,9 +39,9 @@ def move_smartly(file, dir_out, suffix):
         try:
             shutil.move (file, target_dir)
         except shutil.Error:
-            print file + " already exists in destination, not moving."
+            print(file + " already exists in destination, not moving.")
     else:
-        print file + " has no date metadata, not moving."
+        print(file + " has no date metadata, not moving.")
 
 
 def Main(args):
@@ -66,7 +66,7 @@ def Main(args):
         for f in files:
             filename = os.path.join (root, f)
             if mimetypes.guess_type(filename)[0] in ['image/jpeg', 'image/x-canon-cr2']:
-		print filename
+                print(filename)
                 move_smartly (filename, dir_out, suffix)
 
 start=Main(sys.argv)
